@@ -15,9 +15,13 @@ import com.example.shoes.data.local.datastore.LocalDataStore
 import com.example.shoes.data.local.localStorage
 import com.example.shoes.data.repository.AuthRepository
 import com.example.shoes.ui.screen.OnBoard.OnBoard1Screen.OnBoardOneScreen
+import com.example.shoes.ui.screen.OnBoard.OnBoard2Screen.OnBoardTwoScreen
+import com.example.shoes.ui.screen.forgotPassword.ForgotPasswordScreen
 import com.example.shoes.ui.screen.signIn.SignInScreen
 import com.example.shoes.ui.screen.signUp.SignUpScreen
 import com.example.shoes.ui.screen.splashscreen.SplashScreen
+import com.example.shoes.ui.screen.verification.VerificationScreen
+
 import com.example.shoes.ui.theme.ShoesTheme
 import kotlinx.serialization.Serializable
 
@@ -31,7 +35,7 @@ class MainActivity : ComponentActivity() {
 //        val authUseCase = AuthUseCase(localStorage, authRepository)
         setContent {
             ShoesTheme {
-                OnBoardOneScreen()
+                ForgotPasswordScreen()
             }
         }
     }

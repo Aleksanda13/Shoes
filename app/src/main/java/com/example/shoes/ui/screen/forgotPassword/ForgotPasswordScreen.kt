@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,15 +38,16 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.shoes.ui.screen.forgotPassword.component.EmailPopup
 import com.example.shoes.ui.screen.forgotPassword.component.ForgotPasswordButton
 import com.example.shoes.ui.screen.forgotPassword.component.ForgotPasswordTextField
 import com.example.shoes.ui.screen.forgotPassword.component.TitleWithSubtitleText
 import com.example.shoes.ui.screen.signUp.SignUpViewModel
 
-
 @Composable
-fun ForgotPasswordScreen(){
+fun ForgotPasswordScreen() {
     val forgotPasswordViewModel: ForgotPasswordViewModel = viewModel()
+
     Scaffold(
         topBar = {
             Row(
@@ -63,22 +65,38 @@ fun ForgotPasswordScreen(){
             }
         }
     ) { paddingValues ->
-        ForgotPasswordContent(paddingValues, forgotPasswordViewModel)
+        Box(modifier = Modifier.fillMaxSize()) {
+            ForgotPasswordContent(paddingValues, forgotPasswordViewModel)
+
+            if (forgotPasswordViewModel.popupVisible.value) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.Black.copy(alpha = 0.3f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    EmailPopup(onDismiss = { forgotPasswordViewModel.hidePopup() })
+                }
+            }
+        }
     }
 }
 
 @Composable
-fun ForgotPasswordContent(paddingValues: PaddingValues, forgotPasswordViewModel: ForgotPasswordViewModel){
+fun ForgotPasswordContent(
+    paddingValues: PaddingValues,
+    forgotPasswordViewModel: ForgotPasswordViewModel
+) {
     val forgotPasswordState = forgotPasswordViewModel.forgotPasswordState.value
-    Column (
-        modifier = Modifier.padding(paddingValues = paddingValues)
-    ) {
+
+    Column(modifier = Modifier.padding(paddingValues)) {
         TitleWithSubtitleText(
             title = stringResource(R.string.forgot_password_title),
             subTitle = stringResource(R.string.forgot_password_subtitle)
         )
 
-        Spacer(modifier = Modifier.height((40.dp)))
+        Spacer(modifier = Modifier.height(40.dp))
+
         ForgotPasswordTextField(
             placeholder = {
                 Text(
@@ -92,16 +110,17 @@ fun ForgotPasswordContent(paddingValues: PaddingValues, forgotPasswordViewModel:
             },
             isError = forgotPasswordViewModel.emailHasError.value,
             supportingText = {
-                Text(
-                    text = stringResource(R.string.incorrect_email)
-                )
+                Text(text = stringResource(R.string.incorrect_email))
             },
-            label = {
-            }
+            label = {}
         )
 
         ForgotPasswordButton(
-            onClick = {},
+            onClick = {
+                if (!forgotPasswordViewModel.emailHasError.value) {
+                    forgotPasswordViewModel.showPopup()
+                }
+            }
         ) {
             Text(stringResource(R.string.send_message))
         }

@@ -102,10 +102,10 @@ fun ShoesTheme(content: @Composable () -> Unit){
 
 object ShoesTheme {
     val colors: ShoesColors
-    @Composable
-    get() = LocalShoesColors.current
+        @Composable
+        get() = LocalShoesColors.current
 
     val typography
-    @Composable
-    get() = LocalShoesTypography.current
+        @Composable
+        get() = LocalShoesTypography.current
 }
