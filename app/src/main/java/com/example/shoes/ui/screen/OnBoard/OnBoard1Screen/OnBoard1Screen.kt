@@ -77,7 +77,7 @@ fun OnBoardOneScreen(onClickNext: () -> Unit
             modifier = Modifier.padding(bottom = 32.dp)
         ) {
             OnBoardButton(
-                onClick = { }
+                onClick = {onClickNext() }
             ) {
                 Text(stringResource(R.string.on_board1_start))
             }

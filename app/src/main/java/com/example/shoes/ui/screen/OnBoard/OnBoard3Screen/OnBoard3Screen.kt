@@ -70,7 +70,6 @@ fun OnBoardThreeScreen(
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(top = 12.dp)
                 )
-
                 OnboardingIndicatorSvg(
                     totalDots = 3,
                     selectedIndex = 2,
@@ -78,6 +77,13 @@ fun OnBoardThreeScreen(
                 )
             }
         }
+        Image(
+            painter = painterResource(R.drawable.smile),
+            contentDescription = null,
+            modifier = Modifier
+                .size(77.dp)
+                .absoluteOffset(x = 108.dp, y = 109.dp)
+        )
         OnBoardButton(
             onClick = { },
             modifier = Modifier

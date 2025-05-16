@@ -77,8 +77,11 @@ class SignUpViewModel(val authUseCase: AuthUseCase) : ViewModel() {
                         signUpState.value = signUpState.value.copy(isSignUp = true)
 
                     }
+
                     is NetworkResponse.Loading -> {
                         setLoading(true)
+
+
                     }
                 }
             }
