@@ -58,7 +58,8 @@ import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
-fun SignUpScreen(onNavigationToProfile: () -> Unit){
+fun SignUpScreen(
+    onNavigateToSignIn: () -> Unit){
     val signUpViewModel = koinViewModel<SignUpViewModel>()
     val snackBarHostState = remember { SnackbarHostState() }
 
@@ -99,16 +100,16 @@ fun SignUpScreen(onNavigationToProfile: () -> Unit){
             }
         }
     ) { paddingValues ->
-        SignUpContent(paddingValues, signUpViewModel, onNavigationToProfile, snackBarHostState)
+        SignUpContent(paddingValues, signUpViewModel, onNavigateToSignIn, snackBarHostState)
     }
 }
 
 @Composable
-fun SignUpContent(paddingValues: PaddingValues, signUpViewModel: SignUpViewModel, onNavigationToProfile: () -> Unit, snackbarHostState: SnackbarHostState){
+fun SignUpContent(paddingValues: PaddingValues, signUpViewModel: SignUpViewModel, onNavigateToSignIn: () -> Unit, snackbarHostState: SnackbarHostState){
     val signUpState = signUpViewModel.signUpState.value
     LaunchedEffect(signUpState.isSignUp) {
         if (signUpState.isSignUp) {
-            onNavigationToProfile()
+            onNavigateToSignIn()
         }
     }
     LaunchedEffect(signUpState.errorMessage) {

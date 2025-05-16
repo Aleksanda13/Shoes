@@ -45,7 +45,9 @@ import com.example.shoes.ui.screen.forgotPassword.component.TitleWithSubtitleTex
 import com.example.shoes.ui.screen.signUp.SignUpViewModel
 
 @Composable
-fun ForgotPasswordScreen() {
+fun ForgotPasswordScreen(
+    onNavigateToVerification: () -> Unit
+) {
     val forgotPasswordViewModel: ForgotPasswordViewModel = viewModel()
 
     Scaffold(
@@ -66,7 +68,11 @@ fun ForgotPasswordScreen() {
         }
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize()) {
-            ForgotPasswordContent(paddingValues, forgotPasswordViewModel)
+            ForgotPasswordContent(
+                paddingValues = paddingValues,
+                forgotPasswordViewModel = forgotPasswordViewModel,
+                onNavigateToVerification = onNavigateToVerification
+            )
 
             if (forgotPasswordViewModel.popupVisible.value) {
                 Box(
@@ -75,17 +81,22 @@ fun ForgotPasswordScreen() {
                         .background(Color.Black.copy(alpha = 0.3f)),
                     contentAlignment = Alignment.Center
                 ) {
-                    EmailPopup(onDismiss = { forgotPasswordViewModel.hidePopup() })
+                    EmailPopup(
+                        onDismiss = {
+                            forgotPasswordViewModel.hidePopup()
+                            onNavigateToVerification()
+                        }
+                    )
                 }
             }
         }
     }
 }
-
 @Composable
 fun ForgotPasswordContent(
     paddingValues: PaddingValues,
-    forgotPasswordViewModel: ForgotPasswordViewModel
+    forgotPasswordViewModel: ForgotPasswordViewModel,
+    onNavigateToVerification: () -> Unit
 ) {
     val forgotPasswordState = forgotPasswordViewModel.forgotPasswordState.value
 

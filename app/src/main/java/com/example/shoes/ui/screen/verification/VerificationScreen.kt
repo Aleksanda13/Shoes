@@ -29,7 +29,11 @@ import com.example.shoes.R
 import com.example.shoes.ui.theme.ShoesTheme
 
 @Composable
-fun VerificationScreen(onBackClick: () -> Unit = {}) {
+fun VerificationScreen(
+    onBackClick: () -> Unit = {},
+    onVerifySuccess: () -> Unit = {},
+    onNavigateToVerification: () -> Unit = {},
+) {
     val otpLength = 6
     val otpValues = remember { mutableStateListOf(*Array(otpLength) { "" }) }
     val focusRequesters = remember { List(otpLength) { FocusRequester() } }

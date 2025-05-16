@@ -34,7 +34,8 @@ import com.example.shoes.ui.screen.signIn.component.TitleWithSubtitleText
 import com.example.shoes.ui.theme.ShoesTheme
 
 @Composable
-fun OnBoardOneScreen() {
+fun OnBoardOneScreen(onClickNext: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
